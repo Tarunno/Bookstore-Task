@@ -1,6 +1,6 @@
 import {useEffect} from 'react'
 
-function App() {
+const App = () => {
 
   useEffect(() => {
     fetch('http://localhost:8000/api/')
@@ -15,4 +15,4 @@ function App() {
   );
 }
 
-export default App;
+export default App
