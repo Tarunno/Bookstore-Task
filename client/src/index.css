@@ -16,3 +16,10 @@ body {
   padding: 0px;
   box-sizing: border-box;
 }
+
+input[type='text'], input[type='file'], input[type='number']{
+  @apply px-4 py-2 bg-gray-100 border rounded-lg w-full;
+}
+select{
+  @apply px-4 py-2 bg-gray-100 border rounded-lg w-full;
+}
