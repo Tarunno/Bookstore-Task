@@ -9,7 +9,8 @@ def ApiOverView(request):
     api_urls = {
         'GET /api/': 'Api overview',
         'GET /api/books/': 'get all the listed books', 
-        'POST /api/books/add/': 'add a new book'
+        'POST /api/books/add/': 'add a new book',
+        'POST /api/books/filter/': 'filter books'
     }
     return Response(api_urls)
 
@@ -44,3 +45,27 @@ def AddBooks(request):
     book.save()
 
     return Response({'message': 'Book added successfully!'})
+
+
+@api_view(['POST'])
+def FilterBooks(request):
+    books = Book.objects.all()
+
+    starting_price = request.data.get('starting_price')
+    ending_price = request.data.get('endng_price')
+    category = request.data.get('category')
+    seller = request.data.get('seller')
+
+    if starting_price: books = filter(lambda x: x.price >= float(starting_price), books)
+    if ending_price: books = filter(lambda x: x.price <= float(ending_price), books)
+
+    if category and category != 'All': 
+        category = Category.objects.get(name=category)
+        books = filter(lambda x: x.category == category, books)
+
+    if seller and seller != 'All': 
+        seller = Seller.objects.get(name=seller)
+        books = filter(lambda x: x.seller == seller, books)
+        
+    serializer = BookSerializer(books, many=True)
+    return Response(serializer.data)

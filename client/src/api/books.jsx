@@ -33,3 +33,16 @@ export const AddBook = async (payload) => {
   const data = await res.json()
   return data
 }
+
+export const FilterBooks = async (payload) => {
+  const res = await fetch(BASE_URL + 'books/filter/', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-CSRFToken': getToken('csrftoken')
+    },
+    body: JSON.stringify(payload)
+  })
+  const data = await res.json()
+  return data
+}

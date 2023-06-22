@@ -23,3 +23,28 @@ input[type='text'], input[type='file'], input[type='number']{
 select{
   @apply px-4 py-2 bg-gray-100 border rounded-lg w-full;
 }
+
+.slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 80%;
+  height: 8px;
+  --tw-bg-opacity: .5;
+  background-color: rgb(2 81 177 / var(--tw-bg-opacity));
+  outline: none;
+  border-radius: 20px;
+}
+
+.slider .thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  --tw-bg-opacity: 1;
+  border: 2px solid rgb(2 81 177 / var(--tw-bg-opacity));
+  background-color: #fff;
+  cursor: pointer;
+  border-radius: 50%;
+  margin-top: -6px;
+  box-shadow: 3px 2px 15px rgb(161, 161, 161);
+}
