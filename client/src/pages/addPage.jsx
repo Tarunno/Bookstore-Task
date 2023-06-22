@@ -25,6 +25,7 @@ const AddPage = () => {
     else{
       setMessage('Something went wrong')
     }
+    e.target.reset()
   }
 
   return(
