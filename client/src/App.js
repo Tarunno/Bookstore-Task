@@ -1,16 +1,32 @@
-import {useEffect} from 'react'
+import { Route, Routes } from 'react-router-dom';
+import IndexPage from './pages/indexPage';
+import { useEffect, useState } from 'react';
+import { GetBooks } from './api/books';
+import Header from './components/Header';
+import AddPage from './pages/addPage';
 
 const App = () => {
 
+  const [books, setBooks] = useState([])
+
+  const handleGetBooks = async () => {
+    const data = await GetBooks()
+    setBooks(data)
+  }
+
   useEffect(() => {
-    fetch('http://localhost:8000/api/')
-    .then(res => res.json())
-    .then(data => console.log(data))
+    handleGetBooks()
   }, [])
 
   return (
     <div className="App">
-      <h1 className='text-red-500'>TESTING</h1>
+      <Header/>
+      <div>
+        <Routes>
+          <Route path='' element={<IndexPage books={books}/>}/>
+          <Route path='/add' element={<AddPage />}/>
+        </Routes>
+      </div>
     </div>
   );
 }
