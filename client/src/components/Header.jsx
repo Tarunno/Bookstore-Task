@@ -1,6 +1,20 @@
+import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 
-const Header = () => {
+const Header = ({cart, setShowCart}) => {
+
+  const [cartSize, setCartSize] = useState(0)
+
+  useEffect(() => {
+    let size = 0
+    for(let i=0; i<cart.length; i++){
+      if(cart[i] != null){
+        size += cart[i]['quentity']
+      }
+    }
+    setCartSize(size)
+  }, [cart])
+
   return (
     <div className='flex items-center justify-between px-6 py-2 w-full border-b'>
       <div className='flex items-center gap-1 text-[25px] text-brand'>
@@ -13,9 +27,10 @@ const Header = () => {
       </div>
       <ul className='flex items-center justify-between gap-2'>
         <Link to=''> <li className='text-[13px] font-semibold px-4 py-2 border rounded-lg hover:cursor-pointer bg-brand text-white'>Home</li> </Link>
-        <Link to='/add'> <li className='text-[13px] font-semibold px-4 py-2 border rounded-lg hover:cursor-pointer bg-brand text-white'>Add book</li> </Link>
-        <li className='flex text-brand cursor-pointer'>
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-8 h-8 ml-10">
+        <Link to='/add'> <li className='text-[13px] font-medium px-4 py-2 border rounded-lg hover:cursor-pointer bg-brand text-white'>Add book</li> </Link>
+        <li className='flex text-brand cursor-pointer ml-5' onClick={() => setShowCart(true)}>
+          {cartSize > 0 && <p className="relative z-10 h-6 w-6 text-[13px] font-bold flex justify-center items-center text-brand rounded-full shadow-md bg-white border-2 border-brand mr-[-9px] mt-[-4px]">{cartSize}</p>}
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-8 h-8">
             <path fillRule="evenodd" d="M7.5 6v.75H5.513c-.96 0-1.764.724-1.865 1.679l-1.263 12A1.875 1.875 0 004.25 22.5h15.5a1.875 1.875 0 001.865-2.071l-1.263-12a1.875 1.875 0 00-1.865-1.679H16.5V6a4.5 4.5 0 10-9 0zM12 3a3 3 0 00-3 3v.75h6V6a3 3 0 00-3-3zm-3 8.25a3 3 0 106 0v-.75a.75.75 0 011.5 0v.75a4.5 4.5 0 11-9 0v-.75a.75.75 0 011.5 0v.75z" clipRule="evenodd" />
           </svg>
         </li>

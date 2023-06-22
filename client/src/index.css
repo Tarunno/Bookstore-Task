@@ -48,3 +48,37 @@ select{
   margin-top: -6px;
   box-shadow: 3px 2px 15px rgb(161, 161, 161);
 }
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #fff; 
+  border-radius: 10px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #b2b2b2; 
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #9d9d9d; 
+}
+
+.slide-in{
+  animation: slide .4s ease-in-out;
+}
+
+@keyframes slide {
+  0%{
+    right: -300px;
+  }
+  100%{
+    right: 0px;
+  }
+}

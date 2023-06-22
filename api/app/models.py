@@ -36,3 +36,21 @@ class Book(models.Model):
 
     def __str__(self):
         return self.name
+    
+
+
+class Order(models.Model):
+    total_item = models.IntegerField(default=0, null=True, blank=True)
+    total_price = models.IntegerField(default=0, null=True, blank=True)
+
+    def __str__(self):
+        return "Totol Items: " + str(self.total_item) + " | Total Price: " + str(self.total_price)
+    
+
+class OrderItem(models.Model):
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    book = models.ForeignKey(Book, on_delete=models.SET_NULL, null=True, blank=True)
+    quentity = models.IntegerField(default=0, null=True, blank=True)
+
+    def __str__(self):
+        return "Order: " + str(self.order.id) + " | Book: " + str(self.book.name) + " | Quentity: " + str(self.quentity)

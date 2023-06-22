@@ -10,7 +10,8 @@ def ApiOverView(request):
         'GET /api/': 'Api overview',
         'GET /api/books/': 'get all the listed books', 
         'POST /api/books/add/': 'add a new book',
-        'POST /api/books/filter/': 'filter books'
+        'POST /api/books/filter/': 'filter books',
+        'POST /api/order/': 'place order'
     }
     return Response(api_urls)
 
@@ -52,7 +53,7 @@ def FilterBooks(request):
     books = Book.objects.all()
 
     starting_price = request.data.get('starting_price')
-    ending_price = request.data.get('endng_price')
+    ending_price = request.data.get('ending_price')
     category = request.data.get('category')
     seller = request.data.get('seller')
 
@@ -69,3 +70,24 @@ def FilterBooks(request):
         
     serializer = BookSerializer(books, many=True)
     return Response(serializer.data)
+
+
+@api_view(['POST'])
+def PlaceOrder(request):
+    cart = request.data.get('cart')
+    total_item = request.data.get('total_item')
+    total_price = request.data.get('total_price')
+
+    order = Order.objects.create(
+        total_item = total_item,
+        total_price = total_price
+    )
+    
+    for item in cart:
+        book = Book.objects.get(id=item['id'])
+        orderItem = OrderItem.objects.create(order=order, book=book, quentity=item['quentity'])
+        orderItem.save()
+
+    order.save()
+        
+    return Response({'message': 'Order placed!'})

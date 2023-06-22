@@ -3,7 +3,8 @@ import Card from "../components/Card";
 import { GetBooks, FilterBooks } from '../api/books';
 import Filter from '../components/Filter';
 
-const IndexPage = () => {
+
+const IndexPage = ({setCart}) => {
   const [books, setBooks] = useState([])
   const [filter, setFilter] = useState({})
 
@@ -30,7 +31,7 @@ const IndexPage = () => {
       <Filter setFilter={setFilter}/>
       <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4'>
         {books && books.map(book => (
-          <Card key={book.id} book={book} />
+          <Card key={book.id} book={book} setCart={setCart}/>
         ))}
       </div>
     </div>

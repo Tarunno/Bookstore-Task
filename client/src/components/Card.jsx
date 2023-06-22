@@ -1,4 +1,18 @@
-const Card = ({book}) => {
+import { AddToCart } from "../api/books"
+
+const Card = ({book, setCart}) => {
+
+  const handleCart = async(book, action) => {
+    const data = await AddToCart(book, action)
+    let temp = []
+    for(let i=0; i<data.length; i++){
+      if(data[i] != null){
+        temp.push(data[i])
+      }
+    }
+    setCart(temp)
+  }
+
   return (
     <div key={book.id} className='flex gap-2 rounded-xl shadow-lg hover:shadow-xl border overflow-hidden transition-shadow duration-200'>
       <div>
@@ -32,7 +46,10 @@ const Card = ({book}) => {
             </svg>
             {book.price} <span className='text-[13px] ml-1 mt-1'>per copy</span>
           </p>
-          <button className='text-[13px] font-semibold py-2 px-4 border rounded-xl bg-brand text-white'>Add to cart</button>
+          <button 
+            className='text-[13px] font-semibold py-2 px-4 border rounded-xl bg-brand text-white'
+            onClick={() => handleCart(book, 'add')}
+          >Add to cart</button>
         </div>
       </div>
     </div>

@@ -8,6 +8,7 @@ urlpatterns = [
     path('', ApiOverView, name='api_overview'),
     path('books/', GetBooks, name='get_books'),
     path('books/add/', AddBooks, name='add_books'),
-    path('books/filter/', FilterBooks, name='filter_books')
+    path('books/filter/', FilterBooks, name='filter_books'),
+    path('order/', PlaceOrder, name='order')
 
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

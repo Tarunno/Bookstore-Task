@@ -26,7 +26,7 @@ const Filter = ({setFilter}) => {
           />
         </div>
         <div className="flex gap-2 text-[13px]">
-          <select onChange={(e) => setFilter(filter => ({...filter, category:e.target.value}))} className='w-fit' name="category" required>
+          <select onChange={(e) => setFilter(filter => ({...filter, category:e.target.value}))} className='w-fit cursor-pointer' name="category" required>
               <option value="All"> Category: All </option>
               <option value="Fiction"> Fiction </option>
               <option value="Fantasy"> Fantasy </option>
@@ -35,7 +35,7 @@ const Filter = ({setFilter}) => {
               <option value="Horror"> Horror </option>
               <option value="Comics"> Comics </option>
             </select>
-            <select onChange={(e) => setFilter(filter => ({...filter, seller:e.target.value}))} className='w-fit' name="seller" required>
+            <select onChange={(e) => setFilter(filter => ({...filter, seller:e.target.value}))} className='w-fit cursor-pointer' name="seller" required>
               <option value="All">  Saller: All </option>
               <option value="Barnes & Noble"> Barnes & Noble </option>
               <option value="Indigo Books & Music"> Indigo Books & Music </option>
